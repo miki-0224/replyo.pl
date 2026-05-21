@@ -147,16 +147,17 @@ export type BrandKey =
   | "instagram"
   | "whatsapp"
   | "gmail"
-  | "sms"
-  | "booksy";
+  | "sms";
 
+// UWAGA: Booksy świadomie pominięte — Booksy nie ma publicznego API,
+// nie integrujemy w MVP, nie pokazujemy na stronie żeby nie obiecywać czego nie damy.
+// Patrz memory/replyo_saas.md sekcja "Anti-patterny".
 export const brandList: { key: BrandKey; name: string }[] = [
   { key: "instagram", name: "Instagram DM" },
   { key: "messenger", name: "Messenger" },
   { key: "whatsapp", name: "WhatsApp" },
   { key: "gmail", name: "Gmail" },
   { key: "sms", name: "SMS" },
-  { key: "booksy", name: "Booksy" },
 ];
 
 export function BrandIcon({ kind, className }: { kind: BrandKey; className?: string }) {
@@ -171,8 +172,6 @@ export function BrandIcon({ kind, className }: { kind: BrandKey; className?: str
       return <GmailIcon className={className} />;
     case "sms":
       return <SmsIcon className={className} />;
-    case "booksy":
-      return <BooksyIcon className={className} />;
     default:
       return null;
   }

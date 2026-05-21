@@ -1,6 +1,7 @@
 import { HeroBackground } from "./HeroBackground";
 import { HeroSpotlight } from "./HeroSpotlight";
 import { PhoneMockup } from "./PhoneMockup";
+import { ValueProps } from "./ValueProps";
 import { WaitlistForm } from "./WaitlistForm";
 
 export function Hero() {
@@ -46,9 +47,12 @@ export function Hero() {
           </p>
         </div>
 
-        {/* Visual */}
+        {/* Visual — phone + value props side by side */}
         <div className="relative flex justify-center">
-          <PhoneMockup />
+          <div className="relative w-full max-w-[300px] md:max-w-[340px]">
+            <PhoneMockup />
+            <ValueProps />
+          </div>
         </div>
       </div>
     </section>
