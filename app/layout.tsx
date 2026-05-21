@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     "automatyczne rezerwacje",
     "kosmetyczka",
     "brwi rzęsy",
-    "Booksy AI",
+    "asystent salonu",
     "Replyo",
   ],
   authors: [{ name: "Mikołaj Iwasiuk" }],

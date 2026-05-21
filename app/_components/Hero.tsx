@@ -31,8 +31,8 @@ export function Hero() {
 
           <p className="mt-6 max-w-xl text-balance text-base leading-relaxed text-[var(--muted-foreground)] sm:text-lg">
             Replyo to AI recepcjonistka dla salonów beauty. Czyta wiadomości z Messengera,
-            Instagrama i maila, odpowiada na pytania o cenę i terminy, umawia wizyty
-            w Booksy — <span className="text-foreground">24 godziny na dobę</span>.
+            Instagrama i maila, odpowiada na pytania o cenę i terminy, proponuje wolne
+            terminy i potwierdza wizyty — <span className="text-foreground">24 godziny na dobę</span>.
             Ty zajmujesz się klientką w salonie. Ona — pierwszym kontaktem.
           </p>
 

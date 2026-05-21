@@ -3,10 +3,10 @@ const items = [
   "AI 24/7",
   "Messenger",
   "Instagram",
-  "Booksy",
   "WhatsApp",
   "Email",
   "SMS",
+  "Auto-rezerwacje",
 ];
 
 export function BrandMarquee() {
