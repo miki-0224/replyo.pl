@@ -108,18 +108,24 @@ function Chip({
 export function ValueProps() {
   return (
     <>
-      {/* DESKTOP — vertical stack, absolute right of phone */}
+      {/*
+        XL+ (1280+) — vertical stack FULLY OUTSIDE phone (no overlap z wiadomościami).
+        Chipy mogą wyjść ~10px poza viewport na 1440 monitor — to akceptowalne.
+      */}
       <div
         aria-label="Co daje Replyo"
-        className="pointer-events-none absolute right-0 top-1/2 z-10 hidden w-[210px] -translate-y-1/2 translate-x-[55%] flex-col gap-2.5 md:flex lg:translate-x-[62%] xl:translate-x-[72%]"
+        className="pointer-events-none absolute left-full top-1/2 z-10 hidden w-[210px] -translate-y-1/2 flex-col gap-2.5 pl-3 min-[1440px]:flex 2xl:pl-5"
       >
         {props.map((p, i) => (
           <Chip key={i} prop={p} index={i} />
         ))}
       </div>
 
-      {/* MOBILE — 2x2 grid below phone */}
-      <div className="mt-6 grid grid-cols-2 gap-2 md:hidden">
+      {/*
+        Mobile + tablet + small laptop (<1280) — 2x2 grid POD telefonem.
+        Czyste rozwiązanie bez clipping i bez overlap z phone content.
+      */}
+      <div className="mt-6 grid grid-cols-2 gap-2 min-[1440px]:hidden">
         {props.map((p, i) => (
           <Chip key={i} prop={p} index={i} compact />
         ))}
