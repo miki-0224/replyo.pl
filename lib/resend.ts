@@ -115,7 +115,7 @@ function welcomeHtml(kind: WaitlistKind) {
               </p>
 
               <p style="margin:0 0 8px;">
-                Gdybyś chciała pogadać wcześniej — 15 min, zero sprzedaży, po prostu chcę zrozumieć z czym Wasz salon się dziś mierzy — po prostu odpisz na ten mail. Czytam każdą odpowiedź sam.
+                A jeśli znajdziesz 15 minut — chętnie posłucham, jak wygląda u Was kontakt z klientkami. Bez sprzedaży, zwykła rozmowa. Odpisz po prostu na tego maila — odpowiadam osobiście.
               </p>
             </td>
           </tr>
@@ -164,7 +164,7 @@ Zapisałaś się jakiś czas temu — Twój email wciąż siedzi na liście, tak
 
 Premierę planuję za 6–8 tygodni. Dam znać mailem zanim ruszymy — pierwszych 30 salonów dostanie 50% zniżki na pierwszy miesiąc.
 
-Gdybyś chciała pogadać wcześniej — 15 min, zero sprzedaży — po prostu odpisz na ten mail. Czytam każdą odpowiedź sam.
+A jeśli znajdziesz 15 minut — chętnie posłucham, jak wygląda u Was kontakt z klientkami. Bez sprzedaży, zwykła rozmowa. Odpisz po prostu na tego maila — odpowiadam osobiście.
 
 Trzymaj się,
 — Mikołaj
@@ -180,7 +180,7 @@ Tu Mikołaj. Buduję Replyo — AI asystentkę dla salonów beauty, która 24/7 
 
 Premierę planuję za 6–8 tygodni. Dam znać mailem zanim ruszymy — pierwszych 30 salonów dostanie 50% zniżki na pierwszy miesiąc.
 
-Gdybyś chciała pogadać wcześniej — 15 min, zero sprzedaży, po prostu chcę zrozumieć z czym Wasz salon się dziś mierzy — po prostu odpisz na ten mail. Czytam każdą odpowiedź sam.
+A jeśli znajdziesz 15 minut — chętnie posłucham, jak wygląda u Was kontakt z klientkami. Bez sprzedaży, zwykła rozmowa. Odpisz po prostu na tego maila — odpowiadam osobiście.
 
 Trzymaj się,
 — Mikołaj
