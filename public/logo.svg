@@ -1,0 +1,14 @@
+<svg width="160" height="48" viewBox="0 0 160 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Replyo">
+  <defs>
+    <linearGradient id="replyo-mark" x1="2" y1="2" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ff6b9d"/>
+      <stop offset="55%" stop-color="#ff8b78"/>
+      <stop offset="100%" stop-color="#ffb088"/>
+    </linearGradient>
+  </defs>
+  <!-- Mark: gradient rounded square + R glyph -->
+  <rect x="2" y="2" width="44" height="44" rx="13" fill="url(#replyo-mark)"/>
+  <path d="M16 13.5h10c4 0 7.2 3 7.2 7 0 3-1.9 5.7-4.7 6.6L34 35h-4.7l-5.6-7.7H20.6V35H16V13.5zm4.6 4.2v5.8H26c1.6 0 2.9-1.3 2.9-2.9s-1.3-2.9-2.9-2.9h-5.4z" fill="#fff"/>
+  <!-- Wordmark: "replyo" in Instrument Serif italic, baseline aligned -->
+  <text x="56" y="34" font-family="'Instrument Serif', 'Times New Roman', Georgia, serif" font-style="italic" font-size="30" fill="currentColor">replyo</text>
+</svg>

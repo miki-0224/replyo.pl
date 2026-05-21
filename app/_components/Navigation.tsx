@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { Logo } from "./Logo";
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -23,16 +24,8 @@ export function Navigation() {
       )}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
-        <a href="/" className="group flex items-center gap-2">
-          <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-[#ff6b9d] to-[#ffb088]">
-            <span className="text-xs font-semibold text-white">R</span>
-          </span>
-          <span className="font-serif text-xl italic tracking-tight text-foreground">
-            replyo
-          </span>
-          <span className="hidden rounded-full border border-[var(--border)] bg-[var(--card)] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[var(--muted-foreground)] backdrop-blur-md sm:inline-block">
-            soon
-          </span>
+        <a href="/" className="group transition hover:opacity-85">
+          <Logo withBadge size="md" />
         </a>
 
         <nav className="flex items-center gap-1 sm:gap-4 text-sm">
