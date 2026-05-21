@@ -1,40 +1,44 @@
-# Analiza 56 rzeczywistych rozmów klientek salonu
+# Analiza WSZYSTKICH 56 rozmów klientek salonu
 
-Źródło: salon dziewczyny Mikołaja + siostry (insider data, prawdziwe konwersacje SMS/iMessage z klientkami).
-Próbka analizowana: 9 reprezentatywnych screenshotów.
+Źródło: salon dziewczyny Mikołaja + siostry (insider data, prawdziwe konwersacje SMS/iMessage/Instagram DM z klientkami).
+Próbka analizowana: **wszystkie 56 screenshotów**.
 Data analizy: 2026-05-22.
+PII: zachowana — w tym dokumencie żadnych imion ani numerów.
 
 ## TL;DR
 
-**Najważniejszy fakt**: 60-70% wszystkich rozmów to **przełożenie/zmiana terminu wizyty** (reschedule).
-To NIE jest aplikacja do "pierwszego booking" — to aplikacja do **zarządzania reschedule + reminders**.
+**Najważniejszy fakt #1**: ~70% wszystkich rozmów to **przełożenie/zmiana terminu wizyty** (reschedule).
+**Najważniejszy fakt #2**: Średnia rozmowa to **3-7 wymian** zanim termin ustalony — multi-turn negocjacja to NORMA.
+**Najważniejszy fakt #3**: Aż ~30% reschedule wymaga **cascade rebooking** — owner musi pytać innych klientów czy zwolnią slot.
 
-To zmienia priorytety MVP:
-1. **AI musi obsłużyć multi-turn negocjację terminu** (klient proponuje → AI counter → klient counter → akcept)
-2. **AI musi rozumieć kontekst życiowy klientek** (praca, dzieci, choroba, służba)
-3. **AI musi wysyłać reminders** (1 dzień przed + day-of confirm)
-4. **AI musi proponować slot consolidation** ("zwolniło mi się miejsce na X")
+To NIE jest aplikacja do "pierwszego booking" — to **aplikacja do zarządzania kalendarzem + cascade rescheduling + day-of reminders + deposit collection**.
 
 ---
 
-## Kategorie wiadomości (% rzeczywiste, nie zgadywane)
+## Kategorie wiadomości (% z 56 rozmów)
 
-| Kategoria | Częstość | Przykład |
-|-----------|----------|----------|
-| **Reschedule** | 60-70% | "Czy jest jednak szansa na przepisanie na czwartek 18:00?" |
-| **Nowa rezerwacja** | 10-15% | "Hej, będziesz miała jakiś termin na brwi w środę?" |
-| **Same-day confirm** | 10% | "Czy nasza wizyta dzisiaj aktualna?" |
-| **Cancellation** | 5-10% | "Niestety muszę odwołać", "chorobsko mnie rozkłada" |
-| **Info request** | 5% | "Czy mogłabym prosić o przesłanie terminu jaki mamy zapisany" |
+| Kategoria | % | Przykład |
+|-----------|---|----------|
+| **Reschedule** (przełożenie) | ~55% | "Czy jest jednak szansa na przepisanie na czwartek 18:00?" |
+| **Cancel + future rebook** | ~15% | "Niestety muszę odwołać, odezwę się jak będę mogła" |
+| **New booking** (with date range) | ~10% | "Będziesz miała termin na brwi w środę, piątek lub poniedziałek wieczorem?" |
+| **Same-day confirm** | ~7% | "Czy nasza wizyta dzisiaj aktualna?" |
+| **Service info/price question** | ~5% | "Czy wykonujesz zabiegi stymulatory na twarzy? Ile kosztuje?" |
+| **Medical/contraindication** | ~3% | "Czy powiększanie ust między depilacjami laserowymi jest przeciwwskazaniem?" |
+| **Address/location** | ~2% | "Mogę prosić adres?" |
+| **Add-on to existing visit** | ~2% | "Mam depilację 30. Czy moglibyśmy też laminację brwi? Mam imprezę w sobotę" |
+| **Late arrival notification** | ~1% | "Spóźnię się 2 minutki" |
 
 ## Wiadomości inicjowane przez salon (owner-initiated)
 
-| Typ | Przykład |
-|-----|----------|
-| **Day-of reminder** | "hej, przypominam dzisiaj na 10:00, proszę o potwierdzenie" |
-| **Slot consolidation** | "dzień dobry, zwolniło mi się miejsce na jutro na 14:00 czy mogłybyśmy zmienić?" |
-| **Owner reschedule** | "może środa na 10:45? mi właśnie wpisali lekarza i nie dam rady" |
-| **Follow-up after silence** | "hej, jutrzejszy termin aktualny?" |
+| Typ | % rozmów | Przykład |
+|-----|----------|----------|
+| **Day-of reminder + confirm request** | ~40% rozmów ma | "hej, przypominam dzisiaj na 10:00, proszę o potwierdzenie" |
+| **Slot consolidation** (free slot → ping waitlist) | ~15% | "Zwolniło mi się miejsce na jutro na 14:00, czy mogłybyśmy zmienić?" |
+| **Owner reschedule** (illness, doctor, vacation, school) | ~10% | "Mi właśnie wpisali lekarza i nie dam rady" |
+| **Cascade rebook** (asking other clients to move) | ~8% | "Potrzebuję chwili żeby zapytać klientki" |
+| **Follow-up after silence** | ~5% | "Hej, jutrzejszy termin aktualny?" |
+| **Deposit (zadatek) request** | ~7% | "Prosiłabym o przelanie zadatku 50 zł na numer XXX blikiem" |
 
 ---
 
@@ -42,196 +46,323 @@ To zmienia priorytety MVP:
 
 ### 1. Formal "Pani Olu" (~25%)
 ```
-"Dzień dobry Pani Olu, mam wizytę u Pani w środę na 12:30
-ale w pracy mam jakiś armagedon i w środę wątpliwa sprawa..."
+"Dzień dobry Pani Olu, mam wizytę u Pani w środę..."
+"Pozdrawiam, [imię]"
 ```
-- Pełne zdania
+- Pełne zdania, formalne
 - "Pani" + imię
 - "Dzień dobry / Pozdrawiam"
 - Tłumaczy kontekst formalnie
 
-### 2. Casual "hejka" (~50%)
+### 2. Casual "hejka kochana" (~50%)
 ```
-"Hej, będziesz miała jakiś termin na brwi w środę cały dzień,
-piątek, lub poniedziałek ale tak bardziej pod wieczór?"
+"Hej, będziesz miała termin?"
+"Hejka 🥰"
+"Kochana, mogłabyś jednak..."
 ```
-- "hej / hejka"
-- "kochana"
-- Dużo emoji 💗 ❤️ 🥰 🤗
+- "hej / hejka / kochana / Olcia"
+- Diminutivy imion ("Olcia" zamiast "Ola")
+- Dużo emoji 💗 ❤️ 🥰 🤗 🌸
 - Casual flow, mid-sentence requests
 
 ### 3. Practical no-fuss (~25%)
 ```
-"To poproszę piątek"
-"oki, dziękuję"
+"Oki"
 "Pasuje"
+"Dzięki ❤️"
 ```
 - Krótkie odpowiedzi
 - Bezpośrednie potwierdzenia/odrzucenia
 
-**Implikacja dla AI**: musi **automatycznie dostosować ton odpowiedzi** do tonu klientki. Jak "Dzień dobry Pani" → odpowiada formalnie. Jak "hejka" → odpowiada "hejka, hej".
+**Implikacja dla AI**: **automatycznie dostosowuje ton** do tonu klientki. Jak "Dzień dobry Pani" → odpowiada formalnie. Jak "hejka" → odpowiada "hejka 🤍".
 
 ---
 
 ## Słownictwo branżowe (do system promptu)
 
 ### Zabiegi wymieniane przez klientki
-- **laminacja brwi** (+ z koloryzacją / bez)
-- **regulacja brwi** (+ farbka / henna)
-- **rzęsy** / laminacja rzęs
-- **depilacja** (woskiem)
-- **depilacja pach**
-- **kolor brwi**
-- **konsultacja** (samodzielna usługa, often combo z zabiegiem)
-- **zabieg** (generyczne określenie na konkretną usługę kosmetyczną)
-- **powiększanie ust** (kwas hialuronowy)
+**Brwi / rzęsy:**
+- laminacja brwi (+ z farbką / z koloryzacją / sama)
+- regulacja brwi
+- henna brwi
+- kolor brwi
+- lifting rzęs
+- laminacja rzęs
+- brwi i rzęsy (bundle)
 
-### Czas-specyficzne wyrażenia
-- "po dziesiątym" (after the 10th of the month)
-- "weekend"
+**Depilacja:**
+- depilacja laserowa (laser)
+- depilacja woskiem
+- depilacja pach
+- depilacja twarzy
+
+**Pielęgnacja twarzy:**
+- mezoterapia
+- mezoterapia mikroigłowa
+- mezoterapia igłowa
+- stymulatory na twarzy
+- konsultacja przed zabiegiem (samodzielna usługa)
+
+**Makijaż:**
+- makijaż permanentny (+ usuwanie laserem)
+- makijaż okolicznościowy / event
+
+**Inne:**
+- powiększanie ust (kwas hialuronowy)
+- zabieg (generyczne, treatment)
+- pakiet (service combo / package)
+
+### Czas-specyficzne wyrażenia (POLISH-SPECIFIC)
+- "po dziesiątym" / "do dziesiątego"
+- "ten weekend" / "przyszły weekend"
 - "tak bardziej pod wieczór"
-- "godziny popołudniowe / późne popołudniowe"
+- "godziny popołudniowe / poranne / późne popołudniowe"
 - "do południa / przed południem"
-- "całe popołudnie"
-- "ewentualnie"
+- "całe popołudnie" / "cały dzień"
+- "ewentualnie / chyba że"
+- "z samego rana"
+- "po pracy" (after work, usually ~17:00+)
+- "po zajęciach" (after school/uni)
+- "tej drugiej połowy tygodnia"
 
-### Życiowy kontekst który klientki dzielą
-- **Praca / zmiany**: "służba", "praca do 17", "armagedon w pracy", "wpisali mi nadgodziny"
-- **Dzieci**: "muszę odebrać syna od babci"
-- **Inne wizyty**: "jestem u p. Daria na paznokcie", "wpisali lekarza"
-- **Podróże**: "muszę być w Słupsku", "ze Szczecina wracam"
-- **Szkoła/studia**: "po zajęciach wracam", "zjazd na studiach"
-- **Choroba**: "chorobsko mnie rozkłada", "coraz gorzej się czuję"
-- **Finanse**: "nadprogramowe wydatki", "mam wątpliwą sprawę"
+### Życiowy kontekst który klientki dzielą (constraints)
+- **Praca / zmiany**: "służba" (uniformed service like military/police), "praca do 17", "wpisali nadgodziny", "armagedon w pracy", "zamiana zmian", "muszę pracować w sobotę"
+- **Dzieci**: "muszę odebrać syna od babci", "córka chce zostać sama", "mąż musi do pracy, mogę z córką przyjść?"
+- **Inne wizyty / koordynacja**: "jestem u p. Daria na paznokcie", "wpisali lekarza", "mam wizytę u lekarza"
+- **Podróże**: "muszę być w Słupsku", "ze Szczecina wracam", "dojazd ze Stargardu", "muszę zrezygnować z podróży"
+- **Szkoła/studia**: "po zajęciach wracam", "zjazd na studiach", "studia w Poznaniu"
+- **Choroba**: "chorobsko mnie rozkłada", "przeziębiłam się", "rozłożyło mnie", "nie chcę zarazić", "lekarz dał zwolnienie"
+- **Finanse**: "nadprogramowe wydatki", "trochę napiętą sytuację"
+- **Eventy**: "impreza w sobotę", "komunia z córką", "wesele", "integracja w pracy", "święta"
+- **Awarie**: "wypadła naprawa auta", "mam problem z dojazdem"
 
 ---
 
 ## Wzorce flow konwersacji
 
-### Wzór A: Multi-turn negocjacja terminu (~60% rozmów)
+### Wzór A: Multi-turn negocjacja terminu (DOMINUJĄCY, ~55%)
 ```
 Klient: "Czy jest szansa na X?"
 Salon:  "Niestety nie, mam ABC. Może Y?"
-Klient: "Y też nie pasuje. A Z?"
+Klient: "Y też nie pasuje, a Z?"
 Salon:  "Z może być, godzina N?"
 Klient: "Pasuje 💗"
 ```
-**Średnio 3-5 wymian zanim termin ustalony.** AI musi wytrzymać ten back-and-forth.
+**3-7 wymian zanim termin ustalony.** AI MUSI wytrzymać back-and-forth bez frustracji.
 
-### Wzór B: Long-running rebook chain (~15% rozmów)
+### Wzór B: Cascade rebook (~30% reschedule wymaga tego)
 ```
-[Tydzień 1] Klient: cancel
+Klient1: "Czy mogę przesunąć moją wizytę na popołudnie?"
+Salon:  "Potrzebuję chwili żeby zapytać klientki..."
+[Salon → Klient2]: "Czy mogłabyś przesunąć z popołudnia na rano?"
+Klient2: "OK, mogę"
+[Salon → Klient1]: "Tak, mogę przesunąć, popołudnie wolne"
+```
+KLUCZOWY pattern. AI musi **automatycznie pingnąć innych klientów** żeby ustalić cascade.
+
+### Wzór C: Long-running rebook chain (~15%)
+```
+[Tydzień 1] Klient: cancel (choroba/praca)
 [Tydzień 2-3] Cisza
-[Tydzień 4] Salon: "hej, zwolniło mi się X" (owner outreach)
+[Tydzień 4] Salon: "zwolniło mi się X, czy mogłabyś?"
 [Tydzień 4] Klient: "Pasuje, dzięki"
 ```
 
-### Wzór C: Day-of confirmation loop
+### Wzór D: Day-of confirmation + tweak
 ```
-[Rano] Klient: "czy nasza wizyta dzisiaj aktualna?"
-[Rano] Salon: "tak, do zobaczenia"
-[Albo Rano] Salon: "przypominam dzisiaj na X"
-[Klient] "Tak będę 🤗"
+[Rano] Salon: "przypominam dzisiaj na X, proszę o potwierdzenie"
+[Rano] Klient: "Będę 🤗 / Tak tak pamiętam"
+[Albo] Klient: "Czy nasza wizyta aktualna?" (klient pierwszy pyta)
+[Albo] Klient: "Mam pytanie, mogłabym chwilę szybciej? Mam X po pracy"
 ```
 
-### Wzór D: Service downscope
+### Wzór E: First-time inquiry → sales consultation
 ```
-Klient: "Tylko będę musiała zrezygnować z brwi bo mam ograniczony czas..."
-Salon: "OK brwi i rzęsy robimy w tym samym czasie więc nie będzie dłużej"
+Klient: "Czy wykonujesz X?"
+Salon:  "Tak, oraz Y i Z. Jaki efekt Panią interesuje?"
+Klient: "Chciałabym A, ale nie chcę B"
+Salon:  "Pewnie zrobimy C, najlepiej w serii. Jeden zabieg X zł, seria 3 — Y zł"
+Klient: "OK to się decyduję, czy w czwartek byłaby możliwość?"
+```
+
+### Wzór F: Service add-on / scope change
+```
+Klient: "Mam depilację 30. Czy moglibyśmy też laminację brwi? Mam imprezę"
+Salon:  "Tak, dam radę dorzucić w jednym slocie"
+```
+
+### Wzór G: Photo consultation (IG DM)
+```
+Klient: "Hej kochana, prześlę zdjęcie rzęs bo mam wizytę. Czy uważasz że już robić czy poczekać?"
+[zdjęcie]
+Salon:  "Lepiej poczekać, niech naturalne podrosną"
 ```
 
 ---
 
-## Edge cases (AI powinien eskalować)
+## Edge cases — AI eskaluje do właścicielki
 
-1. **Pre-consultation skincare** — klient dzieli detal skincare ("biorę leki, krem z Wit C, maseczka z retimaxu")
-2. **Pricing combos** (consultation + zabieg discount) — wymaga decyzji właścicielki
-3. **Emocjonalne sytuacje** — "muszę odwołać bo nadprogramowe wydatki" wymaga empatii > automation
-4. **Coordinated multi-salon** — klient pyta o slot PRZED/PO wizycie u innego salonu, wymaga inteligentnego planowania
-5. **Owner-side personal constraints** — "mi wpisali lekarza" / "zjazd na studiach" — AI nie powinien proponować takich slotów
-6. **Niejasne formułowania** — "wcześniej nie masz może?" wymaga clarification
+1. **Medical/contraindication questions** — "Czy zabieg X jest przeciwwskazaniem przy Y?"
+2. **Pre-consultation skincare intake** — kosmetyki, leki, suplementy
+3. **Pricing dla combo/serii** (consultation + zabieg discount, seria 3 zabiegów cena)
+4. **Service recommendations** — "co mi polecisz przy X problem?"
+5. **Photo evaluations** — klient wysyła zdjęcie i pyta o ocenę
+6. **Emocjonalne sytuacje** — illness, financial hardship, family emergency
+7. **B2B inquiries** — wynajem gabinetu, kolaboracje
+8. **Coordinated multi-salon** — slot pomiędzy wizytami w 2 różnych miejscach
+9. **Owner-side personal constraints conflict** — gdy klient chce slot kolidujący z osobistymi planami owner
+10. **Standing wait-list management** — "zapisz mnie, jak coś będę pisała"
 
 ---
 
 ## Implikacje dla MVP system promptu
 
-### Co AI MUSI umieć
-1. **Reschedule negotiation** — wielokrotne propose-counter-propose
-2. **Tone matching** — formal vs casual
-3. **Kontekst klientki** — czytać "pracuję do 17, mam dziecko" i NIE proponować slotów 16-17
-4. **Day-of reminders** — automatic message dzień przed + day-of
-5. **Slot consolidation outreach** — gdy ktoś cancel, automatycznie pingnąć kolejną z listy oczekujących
-6. **Owner-side rescheduling** — gdy właścicielka ma blocker, automatically reach out do affected clients
+### Co AI MUSI umieć (Tier 1 — core)
+
+1. **Multi-turn reschedule negotiation** — wielokrotne propose-counter-propose
+2. **Tone matching** — formal "Pani" vs casual "hejka" vs no-fuss
+3. **Kontekst klientki** — czytać "pracuję do 17, mam dziecko" → NIE proponować slotów 16-17
+4. **Day-of reminders** — automatic message dzień przed + day-of z prośbą o confirm
+5. **Slot consolidation** — gdy zwolni się slot, ping wait-list / klientki z gorszym slotem
+6. **Cascade rebook orchestration** — propose to multiple clients to find common ground
 7. **Service bundle awareness** — brwi+rzęsy = jeden slot, nie dwa
+8. **Service duration awareness** — laminacja 90min, brwi 30min, etc.
+9. **Day-of-week patterns** — owner ma "sobota = makijaże", "wtorek wolne" itd.
+10. **Travel time awareness** — owner z drugiego miasta (np. 30-40 min dojazd)
+11. **Day-of arrival updates** — "spóźnię się 5 min" → confirm, no escalation
 
-### Co AI MOŻE pominąć (eskalować)
-- Konsultacje skincare/medyczne
-- Pricing combos
-- Niejasne sytuacje
-- Klienci wymagający empatii (illness, financial)
-- Decyzje strategiczne (dawać rabat? robić wyjątek?)
+### Co AI MUSI umieć (Tier 2 — important)
 
-### Suggested system prompt skeleton
+12. **Address sharing** — automatyczne wysłanie adresu z landmarkiem
+13. **Basic service info** — co, ile czasu, ile kosztuje, czy bundle z czym
+14. **Deposit (zadatek) request** — po confirm wizyty, prośba o BLIK
+15. **Standing wait-list** — klient flexible "zapisz mnie, dam znać jak coś będę"
+16. **New booking with date range** — klient daje wiele opcji, AI sprawdza calendar
+17. **Owner vacation/away periods** — w okresie urlopu nie umawiać
+
+### Co AI MUSI eskalować (Tier 3 — ALWAYS human)
+
+- Medical/contraindication questions
+- Pre-consultation skincare intake
+- Pricing combos / serie / promocje
+- Photo evaluations
+- Emotional situations (illness, family emergency, financial)
+- B2B inquiries (gabinet rental)
+- First-time service recommendations
+- Complex multi-salon coordination
+
+---
+
+## Suggested system prompt skeleton
 
 ```
 Jesteś asystentką salonu beauty {SALON_NAME}.
-Twoim zadaniem: ZARZĄDZANIE TERMINAMI klientek.
+Twoim zadaniem: ZARZĄDZANIE TERMINAMI klientek przez Messenger, Instagram, SMS, email.
 
+═══════════════════════════════════════════
 ZNASZ:
-- Cennik: {PRICING}
-- Godziny otwarcia: {HOURS}
-- Czas usług: brwi 30min, rzęsy 60min, laminacja 90min...
-- Bundle: brwi+rzęsy = jeden slot
-- Wolne terminy: {CALENDAR}
-- Indywidualne preferencje klientek z historii: {CLIENT_HISTORY}
+═══════════════════════════════════════════
+- Cennik: {PRICING_TABLE}
+- Godziny otwarcia: {WORKING_HOURS}
+- Czas usług: brwi 30min, rzęsy 60min, laminacja brwi 90min, laser 30-60min, etc.
+- Bundle: brwi+rzęsy = 1 slot, henna+regulacja = 1 slot
+- Wolne terminy: {LIVE_CALENDAR}
+- Owner constraints: dojazd 30-40min ze Szczecina, sobota = makijaże, wtorek do 14
+- Owner vacation: {VACATION_PERIODS}
+- Klientka historia (jeśli zna): {CLIENT_HISTORY} — preferred times, services, payment, contact channel
 
-ZASADY:
-1. Dostosuj ton do klientki:
-   - "Dzień dobry / Pani" → odpowiadasz formalnie "Pani"
-   - "hej / hejka" → odpowiadasz casual "hejka 🤍"
-2. Jak klientka dzieli kontekst (praca, dziecko, choroba) — UWZGLĘDNIJ to w propozycjach
-3. Propose 2 alternatywne sloty, nie 1
-4. Po decyzji klientki — zarezerwuj i potwierdź
-5. ESKALUJ do właścicielki gdy:
-   - Pre-consultation pytania o zabiegi
-   - Pricing combos
-   - Klientka emocjonalna (illness, financial)
-   - Niejasne pytanie
+═══════════════════════════════════════════
+ZASADY KOMUNIKACJI:
+═══════════════════════════════════════════
+1. **Dostosuj ton do klientki**:
+   - "Dzień dobry / Pani" → odpowiadasz formalnie "Pani / Pani Olu"
+   - "hej / hejka / kochana" → odpowiadasz casual "hejka 🤍 / hej 💗"
+   - Krótka odpowiedź klientki → krótka odpowiedź Twoja
 
-DZIAŁAJ JAK:
-- Ciepła, kompetentna recepcjonistka
-- Mówisz "pierwsza osoba" ("zarezerwowałam", "zapisuję")
-- Używaj emoji subtelnie 🤍 ✨ (nie spamuj)
+2. **Mów w 1. osobie żeńskiej**:
+   - "Zapisuję Cię na…"
+   - "Mogę zaproponować…"
+   - "Sprawdzam terminy…"
+   - "Zarezerwowałam Ci…"
+
+3. **Używaj emoji subtelnie** — 💗 ❤️ 🤍 🥰 — nie spamuj
+
+═══════════════════════════════════════════
+ZASADY OPERACYJNE:
+═══════════════════════════════════════════
+4. **Reschedule = 80% wiadomości**. Zawsze gotowa pomóc, NIE robi problemu.
+
+5. **Klient dzieli kontekst (praca, dziecko, choroba) — UWZGLĘDNIJ** w propozycjach:
+   - "pracuję do 17" → NIE proponuj 16:30
+   - "mam dziecko od babci, muszę odebrać" → krótkie wizyty
+   - "ze Stargardu mam dojazd" → wcześniej info o czasie
+
+6. **Proponuj 2 alternatywne sloty**, nie 1. Dwa to wybór, jeden to ultimatum.
+
+7. **Po decyzji klientki** — zarezerwuj i potwierdź ze szczegółami:
+   "Świetnie! Zapisuję: [dzień] [godzina], [usługa], [cena]. [Szczegóły płatności / SMS]"
+
+8. **Cascade rebook**: jeśli klientka chce slot zajęty przez kogoś innego, sprawdź wait-list i zaproponuj propozycję drugiej klientce.
+
+9. **Day-of reminder** wysyłaj rano (8:00-10:00) z prośbą o potwierdzenie:
+   "hej, przypominam dzisiaj na [godzina], proszę o potwierdzenie 🤍"
+
+10. **Slot consolidation**: gdy ktoś cancel, automatycznie ping wait-list:
+    "Cześć! Zwolniło mi się miejsce na [data] [godzina], czy interesowałaby Cię?"
+
+═══════════════════════════════════════════
+ESKALUJ DO {OWNER_NAME} GDY:
+═══════════════════════════════════════════
+- Pytanie medyczne / przeciwwskazania
+- Pre-consultation skincare intake (kosmetyki, leki, suplementy)
+- Pricing combos / promocje / serie
+- Klientka wysyła zdjęcie z pytaniem
+- Emocjonalna sytuacja (choroba, śmierć, problemy finansowe)
+- B2B (wynajem gabinetu, kolaboracje)
+- First-time consultation o nowym zabiegu
+- Klientka emocjonalna / niezadowolona
+
+W przypadku eskalacji powiedz:
+"Pozwól, że dopytam właścicielkę i wrócę do Ciebie 🤍"
+Następnie wyślij {OWNER_NAME} powiadomienie z kontekstem.
 ```
 
 ---
 
-## Następne kroki (action items)
+## Następne kroki
 
-### Faza 1: Walidacja przez dziewczynę (Wizard of Oz)
-1. Setup workflow: dziewczyna forwarduje nowe wiadomości na Twój WhatsApp
-2. Ty kopiujesz tekst do Claude.ai z above promptem
-3. Wracasz do niej z sugerowaną odpowiedzią
-4. Ona kopiuje/edytuje/wysyła
-5. Mierzysz: ile odpowiedzi AI 100% trafia, ile wymaga edycji, ile do eskalacji
-6. Iterujesz prompt na żywych przykładach
+### Faza 1: Walidacja przez dziewczynę (Wizard of Oz) — 1 tydzień
 
-**Cel po tygodniu**: 70%+ odpowiedzi AI używanych bez modyfikacji
+**Setup**:
+1. Dziewczyna forwarduje nowe wiadomości na Twój WhatsApp/Slack
+2. Ty (lub Claude) z system promptem powyżej generuje sugestię odpowiedzi
+3. Ona kopiuje / edytuje / wysyła
+4. Mierzysz: % używanych bez modyfikacji, % wymagających edycji, % do eskalacji
+
+**Cel po tygodniu**: 65%+ odpowiedzi AI używanych bez modyfikacji, system prompt iterowany na żywych przykładach.
 
 ### Faza 2: MVP build (tygodnie 2-6)
+
 1. Auth + multi-tenant (Supabase RLS)
-2. Calendar storage (Supabase) + UI dla właścicielki
-3. Meta Business API (Messenger + Instagram) — submit App Review tygodnia 1
-4. Email/IMAP integration
-5. Claude API z system promptem zbudowanym z tego dokumentu
-6. Day-of reminder cronjob
-7. Stripe Subscriptions
+2. Calendar storage (Supabase) + UI dla właścicielki + cennik / godziny / usługi config
+3. Meta Business API (Messenger + Instagram) — submit App Review w tygodniu 1
+4. IMAP/Gmail integration
+5. SMS bramka (SerwerSMS / SMSAPI)
+6. Claude API z system promptem z tego dokumentu (per-tenant override)
+7. **Cascade rebook orchestrator** — Tier 1 priorytet (30% reschedule wymaga tego)
+8. Day-of reminder cronjob (8:00-10:00 outreach)
+9. Slot consolidation pinger (gdy ktoś cancel, auto-ping wait-list)
+10. Deposit BLIK integration (Stripe / Przelewy24)
+11. Eskalacja queue dla właścicielki + push notification
 
-### Faza 3: Beta z 2 salonami
-1. Dziewczyna + siostra jako pierwsi beta-testerzy
-2. Live tracking accuracy: ile wiadomości obsłużonych w pełni vs eskalacja
-3. Tygodniowy retrospect: co poprawić w promptach
+### Faza 3: Beta z 2 salonami (tygodnie 7-9)
 
-### Faza 4: Cold acquisition (tygodnie 6-10)
-1. Z LIVE produktem + 2 case studies do innych salonów
-2. DM-y z dowodem: "U mojej dziewczyny AI obsługuje X wiadomości miesięcznie"
+Dziewczyna + siostra jako pierwsi beta-testerzy. Live tracking:
+- accuracy %
+- escalations / day
+- average response time
+- klientka satisfaction (czasami zapytać)
+
+### Faza 4: Cold acquisition (tygodnie 10+)
+
+Z LIVE produktem + 2 case studies. DM-y z proof.
