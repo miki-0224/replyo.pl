@@ -22,8 +22,8 @@ const props: ValueProp[] = [
     Icon: Zap,
     iconClass: "text-[#ff6b9d]",
     glow: "rgba(255,107,157,0.45)",
-    highlight: "3 sek",
-    rest: "odpowiedzi",
+    highlight: "Natychmiast",
+    rest: "odpowiada",
   },
   {
     Icon: CalendarCheck2,
