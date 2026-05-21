@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 
 /* ─────────── Status bar icons (iOS-ish, subtle) ─────────── */
 
@@ -173,8 +174,36 @@ const conversation: Bubble[] = [
 /* ─────────── Main component ─────────── */
 
 export function PhoneMockup() {
+  /* 3D tilt — mouse follow with smooth spring */
+  const containerRef = useRef<HTMLDivElement>(null);
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const rotateX = useTransform(my, [-0.5, 0.5], [8, -8]);
+  const rotateY = useTransform(mx, [-0.5, 0.5], [-10, 10]);
+  const springConfig = { damping: 22, stiffness: 180, mass: 0.6 };
+  const sRotateX = useSpring(rotateX, springConfig);
+  const sRotateY = useSpring(rotateY, springConfig);
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const el = containerRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    mx.set((e.clientX - r.left) / r.width - 0.5);
+    my.set((e.clientY - r.top) / r.height - 0.5);
+  }
+
+  function handleMouseLeave() {
+    mx.set(0);
+    my.set(0);
+  }
+
   return (
-    <div className="relative mx-auto w-full max-w-[300px] md:max-w-[340px]">
+    <div
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative mx-auto w-full max-w-[300px] md:max-w-[340px] [perspective:1400px]"
+    >
       {/* Soft glow behind phone */}
       <div
         aria-hidden
@@ -185,8 +214,14 @@ export function PhoneMockup() {
         }}
       />
 
-      {/* Phone frame — iPhone 15 Pro proportions */}
-      <div className="relative aspect-[9/19.5] w-full overflow-hidden rounded-[2.6rem] border-[9px] border-[#0d0d0d] bg-white shadow-[0_30px_70px_-20px_rgba(15,10,10,0.55),0_0_0_1px_rgba(255,255,255,0.08)_inset]">
+      {/* Phone frame — iPhone 15 Pro proportions + 3D tilt */}
+      <motion.div
+        style={{
+          rotateX: sRotateX,
+          rotateY: sRotateY,
+          transformStyle: "preserve-3d",
+        }}
+        className="relative aspect-[9/19.5] w-full overflow-hidden rounded-[2.6rem] border-[9px] border-[#0d0d0d] bg-white shadow-[0_30px_70px_-20px_rgba(15,10,10,0.55),0_0_0_1px_rgba(255,255,255,0.08)_inset] will-change-transform motion-reduce:!rotate-0">
         {/* Subtle frame shine (top) */}
         <div
           aria-hidden
@@ -254,7 +289,7 @@ export function PhoneMockup() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Floating badge: response time — OUTSIDE phone, top-left */}
       <motion.div

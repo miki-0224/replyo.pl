@@ -25,7 +25,7 @@ export function Navigation() {
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
         <a href="/" className="group transition hover:opacity-85">
-          <Logo withBadge size="md" />
+          <Logo size="md" />
         </a>
 
         <nav className="flex items-center gap-1 sm:gap-4 text-sm">
@@ -37,7 +37,7 @@ export function Navigation() {
           </a>
           <a
             href="#zapis"
-            className="inline-flex h-9 items-center rounded-full bg-foreground px-4 text-xs font-medium text-background transition hover:scale-[1.03]"
+            className="inline-flex h-9 items-center rounded-full border border-[var(--border)] bg-[var(--card)] px-4 text-xs font-medium text-foreground backdrop-blur-md transition hover:border-[var(--accent-rose)]/60 hover:bg-white/80 dark:hover:bg-zinc-900/80"
           >
             Dołącz do listy
           </a>

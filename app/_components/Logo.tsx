@@ -73,7 +73,7 @@ export function LogoMark({ className, transparent = false }: LogoMarkProps) {
       <rect x="2" y="2" width="60" height="60" rx="18" fill="url(#replyo-mark)" />
       <path
         d="M32 14C22.5 14 15 20.5 15 28.5C15 32.5 16.8 36.1 19.6 38.7L17.5 45.8C17.2 47 18.4 48 19.5 47.4L26.3 43.8C28.1 44.3 30 44.6 32 44.6C41.5 44.6 49 38.1 49 30.1C49 22.1 41.5 14 32 14Z"
-        fill="#fff"
+        fill="#fff8f3"
       />
       <circle cx="24" cy="29" r="2.5" fill="#ff6b9d" />
       <circle cx="32" cy="29" r="2.5" fill="#ff8b78" />

@@ -85,7 +85,7 @@ export function WaitlistForm({ source = "landing" }: { source?: string }) {
         inputMode="email"
         autoComplete="email"
         required
-        placeholder="twoj@email.pl"
+        placeholder="imie@salon.pl"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         disabled={status === "loading"}

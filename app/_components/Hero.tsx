@@ -1,4 +1,5 @@
 import { HeroBackground } from "./HeroBackground";
+import { HeroSpotlight } from "./HeroSpotlight";
 import { PhoneMockup } from "./PhoneMockup";
 import { WaitlistForm } from "./WaitlistForm";
 
@@ -9,6 +10,7 @@ export function Hero() {
       className="relative isolate flex items-start overflow-hidden px-5 pb-16 pt-28 sm:px-8 sm:pt-32 lg:min-h-[100svh] lg:items-center lg:pt-40"
     >
       <HeroBackground />
+      <HeroSpotlight />
 
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
         {/* Copy */}
@@ -30,10 +32,9 @@ export function Hero() {
           </h1>
 
           <p className="mt-6 max-w-xl text-balance text-base leading-relaxed text-[var(--muted-foreground)] sm:text-lg">
-            Replyo to AI recepcjonistka dla salonów beauty. Czyta wiadomości z Messengera,
-            Instagrama i maila, odpowiada na pytania o cenę i terminy, proponuje wolne
-            terminy i potwierdza wizyty — <span className="text-foreground">24 godziny na dobę</span>.
-            Ty zajmujesz się klientką w salonie. Ona — pierwszym kontaktem.
+            Twoja AI recepcjonistka. Czyta wiadomości z Messengera, Instagrama i maila,
+            podaje ceny i terminy, potwierdza wizyty —{" "}
+            <span className="text-foreground">24 godziny na dobę</span>.
           </p>
 
           <div className="mt-8 w-full">
