@@ -1,26 +1,93 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Replyo — Premium Soft Beauty palette */
+  --background: #fff8f3;
+  --foreground: #1a0f0f;
+  --muted: #f5ede4;
+  --muted-foreground: #6b5450;
+  --accent-rose: #ff6b9d;
+  --accent-peach: #ffb088;
+  --accent-beige: #e8d5c4;
+  --border: rgba(26, 15, 15, 0.08);
+  --card: rgba(255, 255, 255, 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f0a0a;
+    --foreground: #f5ede4;
+    --muted: #1f1818;
+    --muted-foreground: #a89690;
+    --accent-rose: #ff8bb3;
+    --accent-peach: #ffc4a1;
+    --accent-beige: #4a3d36;
+    --border: rgba(245, 237, 228, 0.1);
+    --card: rgba(31, 24, 24, 0.6);
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent-rose: var(--accent-rose);
+  --color-accent-peach: var(--accent-peach);
+  --color-accent-beige: var(--accent-beige);
+  --color-border: var(--border);
+  --color-card: var(--card);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-instrument-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+html,
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+::selection {
+  background: var(--accent-rose);
+  color: var(--background);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mesh gradient animation */
+@keyframes mesh-shift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(8%, -4%) scale(1.05);
+  }
+  66% {
+    transform: translate(-6%, 4%) scale(0.97);
+  }
+}
+
+/* Marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
