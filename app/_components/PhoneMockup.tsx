@@ -105,6 +105,26 @@ function MicIcon() {
   );
 }
 
+function CalendarIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+      <line x1="16" x2="16" y1="2" y2="6" />
+      <line x1="8" x2="8" y1="2" y2="6" />
+      <line x1="3" x2="21" y1="10" y2="10" />
+    </svg>
+  );
+}
+
 function InstagramGlyph({ className }: { className?: string }) {
   return (
     <svg
@@ -291,12 +311,12 @@ export function PhoneMockup() {
         </div>
       </motion.div>
 
-      {/* Floating badge: response time — OUTSIDE phone, top-left */}
+      {/* Floating badge: response time — TOP-LEFT corner peek-out, NEVER over content */}
       <motion.div
-        initial={{ opacity: 0, x: 20, y: -10 }}
+        initial={{ opacity: 0, x: 12, y: -12 }}
         animate={{ opacity: 1, x: 0, y: 0 }}
         transition={{ delay: 1.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute -left-3 top-24 z-10 flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[11px] font-medium text-zinc-900 shadow-[0_10px_30px_-10px_rgba(255,107,157,0.5)] ring-1 ring-black/5 sm:-left-10"
+        className="absolute -top-3 -left-2 z-20 flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[11px] font-medium text-zinc-900 shadow-[0_10px_30px_-10px_rgba(255,107,157,0.55)] ring-1 ring-black/5 sm:-top-4 sm:-left-6"
       >
         <span className="relative flex h-1.5 w-1.5">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -305,25 +325,15 @@ export function PhoneMockup() {
         Odpowiedź w <span className="text-[#ff6b9d]">3&nbsp;sek</span>
       </motion.div>
 
-      {/* Floating badge: Booksy synced — OUTSIDE phone, bottom-right */}
+      {/* Floating badge: visit saved — BOTTOM-RIGHT corner peek-out, NEVER over content */}
       <motion.div
-        initial={{ opacity: 0, x: -20, y: 10 }}
+        initial={{ opacity: 0, x: -12, y: 12 }}
         animate={{ opacity: 1, x: 0, y: 0 }}
         transition={{ delay: 4.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute -right-3 bottom-28 z-10 flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[11px] font-medium text-zinc-900 shadow-[0_10px_30px_-10px_rgba(255,176,136,0.55)] ring-1 ring-black/5 sm:-right-10"
+        className="absolute -bottom-3 -right-2 z-20 flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[11px] font-medium text-zinc-900 shadow-[0_10px_30px_-10px_rgba(255,176,136,0.55)] ring-1 ring-black/5 sm:-bottom-4 sm:-right-6"
       >
-        <svg
-          viewBox="0 0 24 24"
-          className="h-3.5 w-3.5"
-          fill="none"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden
-        >
-          <path d="M20 6 9 17l-5-5" stroke="#10b981" />
-        </svg>
-        Booksy <span className="text-zinc-500">zsynchronizowane</span>
+        <CalendarIcon className="h-3.5 w-3.5 text-emerald-500" />
+        Wizyta <span className="text-zinc-500">zapisana</span>
       </motion.div>
     </div>
   );
